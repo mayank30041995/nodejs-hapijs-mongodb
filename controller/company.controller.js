@@ -60,6 +60,18 @@ module.exports = {
             return reply.response(error).code(500);
         }
 
+    },
+    async delete(req, reply) {
+
+        if (!req.params.id) {
+            return reply({ err: 'id is required param' }).code(400);
+        }
+        try {
+            var result = await Company.findByIdAndDelete(req.params.id);
+            return reply.response(result);
+        } catch (error) {
+            return h.response(error).code(500);
+        }
     }
 
 };
